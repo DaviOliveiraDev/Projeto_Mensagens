@@ -19,7 +19,9 @@ class CreateTableAvisoUser extends Migration
             $table->foreign('user_id')->references('id')->on('users');
 
             $table->unsignedBigInteger('aviso_id');
-            $table->foreign('aviso_id')->references('id')->on('aviso');
+            $table->foreign('aviso_id')->references('id')->on('aviso')
+                  ->onDelete('cascade')
+                  ->onUpdate('cascade');
 
             $table->dateTime('dt_lido', $precision = 0);
         });
