@@ -50,13 +50,13 @@
     </thead>
 
     <tbody>
-        @foreach ($users as $u)
+        @foreach ($avisos as $aviso)
         <tr>
-            <td>{{$u->id}}</td>
-            <td>{{$u->name}}</td>
+            <td>{{$aviso->id}}</td>
+            <td>{{$aviso->name}}</td>
             <td>
                 <div class="form-check form-switch">
-                    <input name="user_id" value="{{$u->id}}" class="form-check-input" type="checkbox"  id="flexSwitchCheckDefault">
+                    <input name="user_id[{{$aviso->id}}]" value="{{$aviso->id}}" class="form-check-input" type="checkbox"  id="flexSwitchCheckDefault">
                 </div>
             </td>
         </tr>

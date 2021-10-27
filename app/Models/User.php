@@ -46,7 +46,8 @@ class User extends Authenticatable
 
     public function aviso() {
 
-        return $this -> belongsToMany(Aviso::class);
+        return $this -> belongsToMany(Aviso::class)
+                     ->withPivot(['aviso_user']);
         
     }
 

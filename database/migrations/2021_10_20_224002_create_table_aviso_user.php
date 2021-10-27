@@ -15,15 +15,20 @@ class CreateTableAvisoUser extends Migration
     {
         Schema::create('aviso_user', function (Blueprint $table) {
             $table->id();
+            $table->string('aviso_user');
+            
             $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id') ->references('id')->on('users')
+                  ->nullable()
+                  ->onDelete('cascade');
 
             $table->unsignedBigInteger('aviso_id');
             $table->foreign('aviso_id')->references('id')->on('aviso')
-                  ->onDelete('cascade')
-                  ->onUpdate('cascade');
+                  ->nullable()
+                  ->onDelete('cascade');
 
-            $table->dateTime('dt_lido', $precision = 0);
+            $table->dateTime('dt_lido', $precision = 0)
+                  ->nullable();
         });
     }
 

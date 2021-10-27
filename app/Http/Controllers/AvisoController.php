@@ -21,28 +21,56 @@ class AvisoController extends Controller
     public function new(){
         
         //$aviso = Aviso::all();
-        $users = User::all(['id', 'name']);
-        return view('avisos.store', compact('users'));
+        //$users = User::all(['id', 'name']);
+        $avisos = User::all(['id', 'name']);
+        return view('avisos.store', compact('avisos'));
     }
 
 
 
     public function store(AvisoRequest $request)
     {
-        $avisoData = $request -> all();
+    
+    
+        //$avisoData = request()->except(['_token']);
 
-        //$user = $avisoData['user_id'];
-
-        $request -> validated();
+        //$request -> validated();
 
         //$aviso = new Aviso();
-        //$aviso -> create($avisoData);
 
-        $user = User::find($avisoData['user_id']);
-        $user -> aviso() -> create($avisoData);
 
+
+        $avisoData = Aviso::create($request -> all());
+        $avisos = collect($request -> input('user_id', []))
+            ->map(function($aviso){
+                return ['aviso_user' => $aviso];
+            });
         
+        $avisoData -> user() -> sync(
+            $avisos
+        );
+
+
         return redirect() -> route('avisos.index');
+        //$user = User::find($avisoData['user_id']);
+        //$user -> user() -> create($avisoData)->toArray();
+
+
+
+/*
+
+        $avisoData= Aviso::where('user_id', (int) $idAviso)->get()->pluck('user_id', 'user_id');
+        foreach ($aUsers as $aUser) {
+            if (empty($avisoData[$aUser])) {
+
+                Aviso::insert(['user_id' => $aUser]);
+            }
+            unset($avisoData[$aUser]);
+        }
+        */
+
+
+   
     }
 
 
@@ -65,7 +93,7 @@ class AvisoController extends Controller
 
 
         $aviso = Aviso::FindOrFail($id);
-        $aviso -> user() -> associate($avisoData['user_id']);
+        $aviso -> user() -> update($avisoData['user_id']);
         $aviso->update($avisoData);
 
         return redirect() -> route("avisos.index");

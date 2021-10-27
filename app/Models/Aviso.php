@@ -16,7 +16,6 @@ class Aviso extends Model
     protected $fillable = [
         'aviso',
         'conteudo',
-
     ];
 
     public function user()
