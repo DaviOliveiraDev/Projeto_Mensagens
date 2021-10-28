@@ -1,4 +1,3 @@
-<html>
 <head>
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
   <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -8,73 +7,66 @@
 </head>
 
 @section('content')
-<body>
+    <body>
+        <form action="{{route('avisos.update', ['aviso'=> $avisos -> [id]])}}" method="POST">
 
-    <form action="{{route('avisos.update', ['aviso'=> $avisos -> [id]])}}" method="POST">
+            {{csrf_field()}}
 
-        {{csrf_field()}}
+            <h1 class="text-center">Editar Aviso</h1>
 
-        <h1 class="text-center">Editar Aviso</h1>
+            <p class="form-group">
+                <label class="form-label">Título do Aviso</label><br>
+                <input class="form-control" type="text" name="aviso" value="{{$aviso->aviso}}"> 
+            </p>
 
-        <p class="form-group">
-            <label class="form-label">Título do Aviso</label><br>
-            <input class="form-control" type="text" name="aviso" value="{{$aviso->aviso}}"> 
-        </p>
-
-        <div class="row">
-            <div class="col-md-12">
-
-                <div class="col-md-12">        
-                    <textarea name="conteudo" id="summernote" value="{{ $aviso->conteudo }}"></textarea>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="col-md-12">        
+                        <textarea name="conteudo" id="summernote" value="{{ $aviso->conteudo }}"></textarea>
+                    </div>
                 </div>
+            </div>    
 
-            </div>
-        </div>    
+        <script>
+            $(document).ready(function() {
+                $('#summernote').summernote({
+                    height: 400,
+                });
+            });
+        </script>
 
-  <script>
-    $(document).ready(function() {
-        $('#summernote').summernote({
-            height: 400,
-        });
-    });
-  </script>
+        <table class="table table-borderless" >
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
 
-<table class="table table-borderless" >
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>Nome</th>
-            <th>Ações</th>
-        </tr>
-    </thead>
+            <tbody>
+                @foreach ($avisos as $aviso)
+                <tr>
+                    <td>{{$aviso->id}}</td>
+                    <td>{{$aviso->name}}</td>
+                    <td>
+                        <div class="form-check form-switch">
+                            <input name="user_id[{{$aviso->id}}]" value="{{$aviso->id}}" class="form-check-input"  type="checkbox"  id="flexSwitchCheckDefault"
 
-    <tbody>
-        @foreach ($avisos as $aviso)
-        <tr>
-            <td>{{$aviso->id}}</td>
-            <td>{{$aviso->name}}</td>
-            <td>
-                <div class="form-check form-switch">
-                    <input name="user_id[{{$aviso->id}}]" value="{{$aviso->id}}" class="form-check-input"  type="checkbox"  id="flexSwitchCheckDefault"
+                            {{ (is_array(old('user_id')) && in_array(1, old('user_id'))) ? ' checked' : '' }} >
 
-                    {{ (is_array(old('user_id')) && in_array(1, old('user_id'))) ? ' checked' : '' }}
+                        </div>
+                    </td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
 
-                    >
-                </div>
-            </td>
-        </tr>
-        @endforeach
-    </tbody>
-</table>
-
-
-
-<div>
-    <a class="btn btn-success" href="{{route('avisos.index')}}">Voltar</a>
-    <input class="btn btn-success" type="submit" value="atualizar">
-</div>
+    <div>
+        <a class="btn btn-success" href="{{route('avisos.index')}}">Voltar</a>
+        <input class="btn btn-success" type="submit" value="atualizar">
+    </div>
 
 </form>
-</html>
 
 @section('content')
