@@ -22,28 +22,24 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index']);
 
 
-Route::group(['middleware' => ['auth']], function(){
-
+Route::group(['middleware' => ['auth']], function () {
     Route::prefix('users')->group(function () {
-        
         Route::get('/', [UserController::class, 'index'])-> name('users.index');
         Route::get('new', [UserController::class, 'new'])-> name('users.new');
         Route::post('store', [UserController::class, 'store'])-> name('users.store');
         Route::get('edit/{user}', [UserController::class, 'edit'])-> name('users.edit');
         Route::post('update/{user}', [UserController::class, 'update'])-> name('users.update');
         Route::get('remove/{user}', [UserController::class, 'delete'])-> name('users.remove');
-
     });
 
     Route::prefix('avisos')->group(function () {
-        Route::get('/', [AvisoController::class, 'index'])-> name('avisos.index'); 
-        Route::get('new', [AvisoController::class, 'new'])-> name('avisos.new'); 
-        Route::post('store', [AvisoController::class, 'store'])-> name('avisos.store'); 
-        Route::get('edit/{aviso}', [AvisoController::class, 'edit'])-> name('avisos.edit'); 
-        Route::post('update/{aviso}', [AvisoController::class, 'update'])-> name('avisos.update'); 
-        Route::get('remove/{aviso}', [AvisoController::class, 'delete'])-> name('avisos.remove'); 
+        Route::get('/', [AvisoController::class, 'index'])-> name('avisos.index');
+        Route::get('new', [AvisoController::class, 'new'])-> name('avisos.new');
+        Route::post('store', [AvisoController::class, 'store'])-> name('avisos.store');
+        Route::get('edit/{aviso}', [AvisoController::class, 'edit'])-> name('avisos.edit');
+        Route::post('update/{aviso}', [AvisoController::class, 'update'])-> name('avisos.update');
+        Route::get('remove/{aviso}', [AvisoController::class, 'delete'])-> name('avisos.remove');
     });
-    
 });
 
 Auth::routes();

@@ -19,8 +19,6 @@ class AvisoController extends Controller
 
     public function new()
     {
-        //$aviso = Aviso::all();
-        //$users = User::all(['id', 'name']);
         $avisos = User::all(['id', 'name']);
         return view('avisos.store', compact('avisos'));
     }
@@ -31,20 +29,13 @@ class AvisoController extends Controller
         $avisoData = Aviso::create($request->all());
 
         $avisos = collect($request->input('user_id', []))
-                ->map(function($aviso){
+                ->map(function ($aviso) {
                     return ['user_id' => $aviso];
                 });
         
         $avisoData->user()->sync($avisos);
 
         return redirect()->route('avisos.index');
-
-        //$avisoData = request()->except(['_token']);
-        //$request -> validated();
-        //$aviso = new Aviso();
-
-        //$user = User::find($avisoData['user_id']);
-        //$user -> user() -> create($avisoData);
     }
 
 
