@@ -7,16 +7,15 @@
   <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 </head>
 
-
+@section('content')
 <body>
 
-    <form action="{{route('avisos.update', ['aviso'=> $aviso -> id])}}" method="POST">
+    <form action="{{route('avisos.update', ['aviso'=> $avisos -> [id]])}}" method="POST">
 
         {{csrf_field()}}
 
         <h1 class="text-center">Editar Aviso</h1>
 
-    
         <p class="form-group">
             <label class="form-label">Título do Aviso</label><br>
             <input class="form-control" type="text" name="aviso" value="{{$aviso->aviso}}"> 
@@ -31,8 +30,6 @@
 
             </div>
         </div>    
-
-
 
   <script>
     $(document).ready(function() {
@@ -58,7 +55,7 @@
             <td>{{$aviso->name}}</td>
             <td>
                 <div class="form-check form-switch">
-                    <input name="user_id" value="{{$aviso->id}}" class="form-check-input"  type="checkbox"  id="flexSwitchCheckDefault"
+                    <input name="user_id[{{$aviso->id}}]" value="{{$aviso->id}}" class="form-check-input"  type="checkbox"  id="flexSwitchCheckDefault"
 
                     {{ (is_array(old('user_id')) && in_array(1, old('user_id'))) ? ' checked' : '' }}
 
@@ -79,3 +76,5 @@
 
 </form>
 </html>
+
+@section('content')

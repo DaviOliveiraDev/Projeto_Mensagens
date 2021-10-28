@@ -15,45 +15,45 @@ class UserController extends Controller
     }
 
     
-    public function new(){
-
+    public function new()
+    {
         return view('users.store');
-
     }
+
 
     public function store(UserRequest $request)
     {
-
-        $userData = ($request -> all());
-
+        $userData = ($request->all());
 
         $user = new User();
-        $user ->create($userData);
-
+        $user->create($userData);
         
-        return redirect() -> route('users.index');
+        return redirect()->route('users.index');
     }
 
-    public function edit(User $user){
+
+    public function edit(User $user)
+    {
         return view('users.edit', compact('user'));
     }
+
 
     public function update(UserRequest $request, $id)
     {
         $userData = ($request -> all());
 
         $user = User::findOrFail($id);
-        $user -> update($userData);
+        $user->update($userData);
 
-        return redirect() -> route('users.index');
+        return redirect()->route('users.index');
     }
+
 
     public function delete($id)
     {    
+        $user =  User::findOrFail($id);
+        $user->delete();
 
-    $user =  User::findOrFail($id);
-    $user -> delete();
-
-    return redirect() -> route('users.index');
+        return redirect()->route('users.index');
     }
 }

@@ -15,7 +15,6 @@ class CreateTableAvisoUser extends Migration
     {
         Schema::create('aviso_user', function (Blueprint $table) {
             $table->id();
-            $table->string('aviso_user');
             
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id') ->references('id')->on('users')

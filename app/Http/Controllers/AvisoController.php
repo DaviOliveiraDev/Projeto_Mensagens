@@ -17,9 +17,8 @@ class AvisoController extends Controller
     }
 
 
-
-    public function new(){
-        
+    public function new()
+    {
         //$aviso = Aviso::all();
         //$users = User::all(['id', 'name']);
         $avisos = User::all(['id', 'name']);
@@ -27,85 +26,54 @@ class AvisoController extends Controller
     }
 
 
-
     public function store(AvisoRequest $request)
     {
-    
-    
+        $avisoData = Aviso::create($request->all());
+
+        $avisos = collect($request->input('user_id', []))
+                ->map(function($aviso){
+                    return ['user_id' => $aviso];
+                });
+        
+        $avisoData->user()->sync($avisos);
+
+        return redirect()->route('avisos.index');
+
         //$avisoData = request()->except(['_token']);
-
         //$request -> validated();
-
         //$aviso = new Aviso();
 
-
-
-        $avisoData = Aviso::create($request -> all());
-        $avisos = collect($request -> input('user_id', []))
-            ->map(function($aviso){
-                return ['aviso_user' => $aviso];
-            });
-        
-        $avisoData -> user() -> sync(
-            $avisos
-        );
-
-
-        return redirect() -> route('avisos.index');
         //$user = User::find($avisoData['user_id']);
-        //$user -> user() -> create($avisoData)->toArray();
-
-
-
-/*
-
-        $avisoData= Aviso::where('user_id', (int) $idAviso)->get()->pluck('user_id', 'user_id');
-        foreach ($aUsers as $aUser) {
-            if (empty($avisoData[$aUser])) {
-
-                Aviso::insert(['user_id' => $aUser]);
-            }
-            unset($avisoData[$aUser]);
-        }
-        */
-
-
-   
+        //$user -> user() -> create($avisoData);
     }
-
 
 
     public function edit(Aviso $aviso)
     {
-        $user = User::all(['id', 'name']);
-        return view('avisos.edit', compact('aviso', 'user'));
+        $avisos = User::all(['id', 'name']);
+        return view('avisos.edit', compact('avisos'));
     }
-
 
 
     public function update(AvisoRequest $request, $id)
     {
-        $avisoData = $request -> all();
+        $avisoData = $request->all();
 
-        $request -> validated();
-
-
-
+        $request->validated();
 
         $aviso = Aviso::FindOrFail($id);
-        $aviso -> user() -> update($avisoData['user_id']);
+        $aviso->user()->update($avisoData['user_id']);
         $aviso->update($avisoData);
 
-        return redirect() -> route("avisos.index");
+        return redirect()->route("avisos.index");
     }
-
 
 
     public function delete($id)
     {
         $aviso = Aviso::FindOrFail($id);
-        $aviso -> delete();
+        $aviso->delete();
 
-        return redirect() -> route('avisos.index');
+        return redirect()->route('avisos.index');
     }
 }
