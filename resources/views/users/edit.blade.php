@@ -5,7 +5,7 @@
 <hr>
 
 <div class="container">
-    <form action="{{route('users.update',  ['user'=> $user -> id])}}" method="POST">
+    <form action="{{route('users.update',  ['user'=> $user->id])}}" method="POST">
 
         {{csrf_field()}}
 

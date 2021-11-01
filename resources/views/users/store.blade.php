@@ -6,13 +6,11 @@
     <form action="{{route('users.store')}}" method="POST">
 
         {{csrf_field()}}
-
-
             
-                <p class="form-group">
-                    <label class="form-label">Nome do Usuário</label><br>
-                    <input class="form-control" type="text" name="name" value="{{old('name')}}"> 
-                </p>
+        <p class="form-group">
+            <label class="form-label">Nome do Usuário</label><br>
+            <input class="form-control" type="text" name="name" value="{{old('name')}}"> 
+        </p>
 
 
         <p class="form-group">
@@ -42,6 +40,7 @@
             @endif
         </p>
 
+
         <p class="form-group">
             <label class="form-label" for="">Confirmar Senha</label><br>
             <input class="form-control @if ($errors->has('password_confirmation')) is-invalid @endif" type="password" name="password_confirmation" value="{{old('password_confirmation')}}">
@@ -60,8 +59,7 @@
             <a class="btn btn-success" href="{{route('users.index')}}">Voltar</a>
             <input  class="btn btn-success" type="submit" name="" id="" value="Cadastrar">
         </div>  
-    </div> 
-
+        
     </form>
 </div>
 

@@ -39,6 +39,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('edit/{aviso}', [AvisoController::class, 'edit'])-> name('avisos.edit');
         Route::post('update/{aviso}', [AvisoController::class, 'update'])-> name('avisos.update');
         Route::get('remove/{aviso}', [AvisoController::class, 'delete'])-> name('avisos.remove');
+        Route::get('meusAvisos', [AvisoController::class, 'meusAvisos'])-> name('meusAvisos');
     });
 });
 

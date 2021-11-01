@@ -7,6 +7,7 @@ use App\Models\Aviso;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 class AvisoController extends Controller
 {
@@ -39,10 +40,10 @@ class AvisoController extends Controller
     }
 
 
-    public function edit(Aviso $aviso)
+    public function edit(Aviso $aviso, User $user)
     {
-        $avisos = User::all(['id', 'name']);
-        return view('avisos.edit', compact('avisos'));
+        $user = User::all(['id', 'name']);
+        return view('avisos.edit', compact('aviso', 'user'));
     }
 
 
@@ -52,12 +53,29 @@ class AvisoController extends Controller
 
         $request->validated();
 
-        $aviso = Aviso::FindOrFail($id);
-        $aviso->user()->update($avisoData['user_id']);
+        $aviso = Aviso::Find($id);
+        //$aviso->aviso()->sync($avisoData['user_id']);
         $aviso->update($avisoData);
 
         return redirect()->route("avisos.index");
     }
+
+
+    /*public function edit(User $user)
+    {
+        return view('users.edit', compact('user'));
+    }
+
+
+    public function update(UserRequest $request, $id)
+    {
+        $userData = ($request -> all());
+
+        $user = User::findOrFail($id);
+        $user->update($userData);
+
+        return redirect()->route('users.index');
+    }*/
 
 
     public function delete($id)
@@ -66,5 +84,16 @@ class AvisoController extends Controller
         $aviso->delete();
 
         return redirect()->route('avisos.index');
+    }
+
+
+    public function meusAvisos(Request $request)
+    {
+        $avisos = Auth::user()->aviso()
+                              ->select('user_id', 'aviso')
+                              ->get();
+
+        $date = Carbon::now()->toDateTimeString();
+        return view('meusAvisos', compact('avisos', 'date'));
     }
 }

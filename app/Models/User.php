@@ -43,11 +43,9 @@ class User extends Authenticatable
         'user_id' => 'array'
     ];
 
-    public function aviso() {
-
+    public function aviso()
+    {
         return $this ->belongsToMany(Aviso::class)
-                     ->withPivot(['user_id']);
-        
+                     ->withPivot(['id']);
     }
-
 }
