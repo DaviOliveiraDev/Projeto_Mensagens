@@ -35,7 +35,6 @@ class AvisoController extends Controller
                 });
         
         $avisoData->user()->sync($avisos);
-
         return redirect()->route('avisos.index');
     }
 
@@ -54,46 +53,40 @@ class AvisoController extends Controller
         $request->validated();
 
         $aviso = Aviso::Find($id);
-        //$aviso->aviso()->sync($avisoData['user_id']);
+        $aviso->user()->sync($avisoData['user_id']);
         $aviso->update($avisoData);
-
         return redirect()->route("avisos.index");
     }
 
-
-    /*public function edit(User $user)
-    {
-        return view('users.edit', compact('user'));
-    }
-
-
-    public function update(UserRequest $request, $id)
-    {
-        $userData = ($request -> all());
-
-        $user = User::findOrFail($id);
-        $user->update($userData);
-
-        return redirect()->route('users.index');
-    }*/
-
-
+    
     public function delete($id)
     {
         $aviso = Aviso::FindOrFail($id);
         $aviso->delete();
-
         return redirect()->route('avisos.index');
     }
 
 
     public function meusAvisos(Request $request)
     {
-        $avisos = Auth::user()->aviso()
-                              ->select('user_id', 'aviso')
-                              ->get();
+        $meuAviso = Auth::user()->aviso()->select('user_id', 'aviso', 'conteudo', 'aviso_id')->get();
 
-        $date = Carbon::now()->toDateTimeString();
-        return view('meusAvisos', compact('avisos', 'date'));
+        return view('meusAvisos.meusAvisos', compact('meuAviso'));
+    }
+
+    public function marcarComoLido(Request $request, int $aviso_id, int $user_id)
+    {
+        $avisoData = $request->except(['_token']);
+
+        $data = Aviso::FindOrFail($aviso_id, $user_id);
+        $data->dt_lido = date('Y-m-d H:i:s');
+        $data->user()->updateExistingPivot($avisoData)->save();
+
+        /*
+        $data->user()->save($avisoData);
+        $data->update($avisoData);
+*/
+
+        return redirect()->route('meusAvisos.meusAvisos');
     }
 }

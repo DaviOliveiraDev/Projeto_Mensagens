@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-<div>
+<div class="container">
 
     <a class="btn btn-success" href="{{route('avisos.new')}}">Adicionar Novo Aviso</a>
 
@@ -17,9 +17,7 @@
         </thead>
         <tbody>
             @foreach ($aviso as $aviso) 
-
             <tr>
-
                 <td>{{$aviso ->id}}</td>
                 <td>{{$aviso ->aviso}}</td>
 
@@ -29,10 +27,8 @@
 
                 </td>
             </tr>
-           
             @endforeach
         </tbody>
-
     </div>
 </div>
 @endsection

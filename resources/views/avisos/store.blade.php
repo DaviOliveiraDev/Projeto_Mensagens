@@ -1,12 +1,11 @@
-
 @extends('layouts.app')
 @section('content')
+<h1 class="d-flex justify-content-center">Avisos</h1>
+
 <div class="container">
     <form action="{{route('avisos.store')}}" method="POST">
 
         {{csrf_field()}}
-
-        <h1 class="text-center">Avisos </h1>
 
         <p class="form-group">
             <label class="form-label">Título do Aviso</label><br>
@@ -15,7 +14,6 @@
 
         <div class="row">
             <div class="col-md-12">
-
                 <div class="col-md-12">        
                     <textarea name="conteudo" id="summernote" value="{{old('conteudo')}}"></textarea>
                 </div>

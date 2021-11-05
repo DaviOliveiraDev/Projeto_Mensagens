@@ -3,6 +3,7 @@
 use App\Http\Controllers\AvisoController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AvisoUserController;
+use App\Models\Aviso;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -39,7 +40,11 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('edit/{aviso}', [AvisoController::class, 'edit'])-> name('avisos.edit');
         Route::post('update/{aviso}', [AvisoController::class, 'update'])-> name('avisos.update');
         Route::get('remove/{aviso}', [AvisoController::class, 'delete'])-> name('avisos.remove');
-        Route::get('meusAvisos', [AvisoController::class, 'meusAvisos'])-> name('meusAvisos');
+    });
+
+    Route::prefix('meusAvisos')->group(function () {
+        Route::get('/', [AvisoController::class, 'meusAvisos'])->name('meusAvisos.meusAvisos');
+        Route::post('/update/{aviso_id}/{user_id}', [AvisoController::class, 'marcarComoLido'])->name('meusAvisos.update');
     });
 });
 

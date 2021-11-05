@@ -43,9 +43,11 @@ class User extends Authenticatable
         'user_id' => 'array'
     ];
 
+    protected $dates = ['dt_lido'];
+
     public function aviso()
     {
-        return $this ->belongsToMany(Aviso::class)
-                     ->withPivot(['id']);
+        return $this ->belongsToMany(Aviso::class, 'aviso_user')
+                     ->withPivot(['id', 'user_id', 'dt_lido', 'aviso_id']);
     }
 }

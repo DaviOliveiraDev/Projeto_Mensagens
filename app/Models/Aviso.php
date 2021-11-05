@@ -15,9 +15,12 @@ class Aviso extends Model
         'conteudo',
     ];
 
+
+    protected $primaryKey = 'id';
+
     public function user()
     {
-        // return $this->belongsToMany(User::class, 'aviso_user', '1', 'aviso_id');
-        return $this->belongsToMany(User::class);
+        return $this->belongsToMany(User::class, 'aviso_user', 'aviso_id', 'user_id')
+                    ->withPivot(['id', 'user_id', 'dt_lido', 'aviso_id']);
     }
 }

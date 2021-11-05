@@ -12,7 +12,6 @@
             <input class="form-control" type="text" name="name" value="{{old('name')}}"> 
         </p>
 
-
         <p class="form-group">
             <label class="form-label" for="">E-mail</label><br>
             <input class="form-control @if ($errors->has('email')) is-invalid @endif" type="email" name="email" value="{{old('email')}}">

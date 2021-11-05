@@ -19,12 +19,14 @@ class CreateTableAvisoUser extends Migration
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id') ->references('id')->on('users')
                   ->nullable()
-                  ->onDelete('cascade');
+                  ->onDelete('cascade')
+                  ->onUpdate('cascade');
 
             $table->unsignedBigInteger('aviso_id');
             $table->foreign('aviso_id')->references('id')->on('aviso')
                   ->nullable()
-                  ->onDelete('cascade');
+                  ->onDelete('cascade')
+                  ->onUpdate('cascade');
 
             $table->dateTime('dt_lido', $precision = 0)
                   ->nullable();

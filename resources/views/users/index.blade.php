@@ -1,11 +1,11 @@
 @extends('layouts.app')
 @section('content')
-<div>
+<div class="container">
 
     <a class="btn btn-success" href="{{route('users.new')}}">Adicionar Novo Usuário</a>
 
     <h2 class="d-flex justify-content-center">Usuários</h2>
-  
+
   
     <table class="table">
         <thead>

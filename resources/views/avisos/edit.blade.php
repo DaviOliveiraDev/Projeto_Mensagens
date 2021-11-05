@@ -38,8 +38,13 @@
                             <td>{{$u->name}}</td>
                             <td>
                                 <div class="form-check form-switch">
-        
-                                    <input {{isset($u['user_id'])&&$u['user_id']=='Yes' ? 'checked' : ''}} id="private_post" value="Yes" type="checkbox" name="private_post">
+                                    <div class="form-check form-switch">
+                                        <input name="user_id[]" value="{{$aviso->id}}" 
+                                        class="form-check-input" 
+                                        type="checkbox"  
+                                        id="flexSwitchCheckDefault">
+                                    </div>
+
         
                                 </div>
                             </td>
