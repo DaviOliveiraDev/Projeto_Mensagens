@@ -74,18 +74,14 @@ class AvisoController extends Controller
         return view('meusAvisos.meusAvisos', compact('meuAviso'));
     }
 
-    public function marcarComoLido(Request $request, int $aviso_id, int $user_id)
+    public function marcarComoLido(Request $request)
     {
-        $avisoData = $request->except(['_token']);
+        $user_id = $request->user_id;
+        $aviso_id = $request->aviso_id;
 
-        $data = Aviso::FindOrFail($aviso_id, $user_id);
+        $data = Aviso::FindOrFail($aviso_id);
         $data->dt_lido = date('Y-m-d H:i:s');
-        $data->user()->updateExistingPivot($avisoData)->save();
-
-        /*
-        $data->user()->save($avisoData);
-        $data->update($avisoData);
-*/
+        $data->user()->updateExistingPivot($user_id, ['dt_lido' => date('Y-m-d H:i:s')]);
 
         return redirect()->route('meusAvisos.meusAvisos');
     }

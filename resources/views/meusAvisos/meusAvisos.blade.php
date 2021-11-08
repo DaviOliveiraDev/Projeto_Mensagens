@@ -8,6 +8,7 @@
             <tr>
                 <th>ID</th>
                 <th>Nome</th>
+                <th>Id - Pivot</th>
                 <th>Ações</th>
             </tr>
         </thead>
@@ -17,6 +18,7 @@
             <tr>
                 <td>{{$a->aviso_id}}</td>
                 <td>{{$a->user_id}}</td>
+                <td>{{$a->pivot->id}}</td>
                 <td>{{$a->aviso}}</td>
                 <td>
                     <button value='date' name="date" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal{{$a->pivot->id}}">
