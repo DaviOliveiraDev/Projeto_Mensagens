@@ -69,19 +69,32 @@ class AvisoController extends Controller
 
     public function meusAvisos(Request $request)
     {
-        $meuAviso = Auth::user()->aviso()->select('user_id', 'aviso', 'conteudo', 'aviso_id')->get();
+        $meuAviso = Auth::user()->aviso()->select('user_id', 'aviso', 'conteudo', 'aviso_id', 'dt_lido')->get();
 
         return view('meusAvisos.meusAvisos', compact('meuAviso'));
     }
 
     public function marcarComoLido(Request $request)
     {
+        date_default_timezone_set('America/Sao_Paulo');
         $user_id = $request->user_id;
         $aviso_id = $request->aviso_id;
 
         $data = Aviso::FindOrFail($aviso_id);
         $data->dt_lido = date('Y-m-d H:i:s');
         $data->user()->updateExistingPivot($user_id, ['dt_lido' => date('Y-m-d H:i:s')]);
+
+        return redirect()->route('meusAvisos.meusAvisos');
+    }
+
+    public function lerDepois(Request $request)
+    {
+        $user_id = $request->user_id;
+        $aviso_id = $request->aviso_id;
+
+        $data = Aviso::FindOrFail($aviso_id);
+        $data->dt_lido = date('Y-m-d H:i:s');
+        $data->user()->updateExistingPivot($user_id, ['dt_lido' => null]);
 
         return redirect()->route('meusAvisos.meusAvisos');
     }

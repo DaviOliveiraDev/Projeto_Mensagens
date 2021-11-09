@@ -45,6 +45,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::prefix('meusAvisos')->group(function () {
         Route::get('/', [AvisoController::class, 'meusAvisos'])->name('meusAvisos.meusAvisos');
         Route::post('/update/{aviso_id}/{user_id}', [AvisoController::class, 'marcarComoLido'])->name('meusAvisos.update');
+        Route::post('/lerDepois/{aviso_id}/{user_id}', [AvisoController::class, 'lerDepois'])->name('meusAvisos.lerDepois');
     });
 });
 

@@ -8,7 +8,6 @@
             <tr>
                 <th>ID</th>
                 <th>Nome</th>
-                <th>Id - Pivot</th>
                 <th>Ações</th>
             </tr>
         </thead>
@@ -17,8 +16,6 @@
             @foreach ($meuAviso as $a) 
             <tr>
                 <td>{{$a->aviso_id}}</td>
-                <td>{{$a->user_id}}</td>
-                <td>{{$a->pivot->id}}</td>
                 <td>{{$a->aviso}}</td>
                 <td>
                     <button value='date' name="date" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal{{$a->pivot->id}}">
@@ -41,11 +38,16 @@
                         </div>
 
                     <div class="modal-footer">
+                        <form action="{{route('meusAvisos.lerDepois',['aviso_id'=>$a->aviso_id ,'user_id'=>$a->user_id])}}" method="POST">
+                            {{csrf_field()}}
+                           <input class="btn btn-success" type="submit" name="lerDepois" value="ler Depois">
+                       </form>
+
                         <form action="{{route('meusAvisos.update',['aviso_id'=>$a->aviso_id ,'user_id'=>$a->user_id])}}" method="POST">
                              {{csrf_field()}}
-                             <input type="hidden" name="dt_lido">
-                            <input class="btn btn-success" type="submit" value="Cadastrar">
+                            <input class="btn btn-success" type="submit" value="Marcar Como Lido">
                         </form>
+
                     </div>
                 </div>
             </div>
