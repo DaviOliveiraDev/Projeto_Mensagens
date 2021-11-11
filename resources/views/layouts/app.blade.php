@@ -59,15 +59,13 @@
                             @endif
                         @else
 
-
-                      
                         <div class="dropdown">
                             <button class="btn dropdown-toggle" href="#" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown">            
                                     {{ Auth::user()->name }}
                             </button>
                             <ul class="dropdown-menu" role="menu">
                                 <li>
-                                    <a href="{{ url('/logout') }}"
+                                    <a class="dropdown-item" href="{{ url('/logout') }}"
                                         onclick="event.preventDefault();
                                                  document.getElementById('logout-form').submit();">
                                         Logout

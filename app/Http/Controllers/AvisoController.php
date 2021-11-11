@@ -41,20 +41,22 @@ class AvisoController extends Controller
 
     public function edit(Aviso $aviso, User $user)
     {
-        $user = User::all(['id', 'name']);
-        return view('avisos.edit', compact('aviso', 'user'));
+        $users = User::all();
+        return view('avisos.edit', compact('aviso', 'users'));
     }
 
 
     public function update(AvisoRequest $request, $id)
     {
         $avisoData = $request->all();
+        $user_id = $request->user_id;
 
         $request->validated();
 
-        $aviso = Aviso::Find($id);
-        $aviso->user()->sync($avisoData['user_id']);
+        $aviso = Aviso::FindOrFail($id);
         $aviso->update($avisoData);
+        $aviso->user()->sync($user_id);
+
         return redirect()->route("avisos.index");
     }
 
@@ -77,6 +79,7 @@ class AvisoController extends Controller
     public function marcarComoLido(Request $request)
     {
         date_default_timezone_set('America/Sao_Paulo');
+
         $user_id = $request->user_id;
         $aviso_id = $request->aviso_id;
 

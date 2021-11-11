@@ -32,17 +32,16 @@
                     </thead>
         
                     <tbody>
-                        @foreach ($user as $u)
+                        @foreach ($users as $user)
                         <tr>
-                            <td>{{$u->id}}</td>
-                            <td>{{$u->name}}</td>
+                            <td>{{$user->id}}</td>
+                            <td>{{$user->name}}</td>
                             <td>
                                 <div class="form-check form-switch">
                                     <div class="form-check form-switch">
-                                        <input name="user_id[]" value="{{$aviso->id}}" 
-                                        class="form-check-input" 
-                                        type="checkbox"  
-                                        id="flexSwitchCheckDefault">
+                                        <input type="checkbox" name="user_id[]" value="{{$user->id}}" class="form-check-input" 
+                                        id="flexSwitchCheckDefault"                                        
+                                        @if($user->aviso->contains($aviso->id)) checked @endif >
                                     </div>
 
         
