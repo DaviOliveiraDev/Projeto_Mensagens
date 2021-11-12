@@ -65,6 +65,7 @@ class AvisoController extends Controller
     {
         $aviso = Aviso::FindOrFail($id);
         $aviso->delete();
+
         return redirect()->route('avisos.index');
     }
 

@@ -26,7 +26,7 @@
                 <tr>
                     <th>ID</th>
                     <th>Nome</th>
-                    <th>Ações</th>
+                    <th>Ação</th>
                 </tr>
             </thead>
 
@@ -38,7 +38,7 @@
 
                     <td>  
                         <div class="form-check form-switch">
-                            <input name="user_id[{{$aviso->id}}]" value="{{$aviso->id}}" class="form-check-input" type="checkbox"  id="flexSwitchCheckDefault">
+                            <input name="user_id[]" value="{{$aviso->id}}" class="form-check-input" type="checkbox"  id="flexSwitchCheckDefault">
                         </div>
                     </td>
 
@@ -62,11 +62,30 @@
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 
-    <script>
+    <script type="text/javascript">
         $(document).ready(function() {
             $('#summernote').summernote({
                 height: 400,
             });
         });
+
+        function toggle_check() {
+            var checkboxes = document.getElementByName('user_id[]');
+            var btn = document.getElementById('toggle');
+
+            if(btn.value == 'select'){
+                for(var i in checkboxes){
+                    checkboxes[i].checked = 'FALSE'
+                }
+                btn.value = 'deselect'
+            }else{
+                for(var i in checkboxes){
+                    checkboxes[i].checked = ''
+                }
+                btn.value = 'select'
+            }
+
+        }
+
     </script>
 @endsection
