@@ -6,14 +6,14 @@ use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Laravel\Dusk\Browser;
 use Tests\DuskTestCase;
 
-class criarAviso extends DuskTestCase
+class excluirAviso extends DuskTestCase
 {
     /**
      * A Dusk test example.
      *
      * @return void
      */
-    public function testCriarAviso()
+    public function testExcluirAviso()
     {
         $this->browse(function (Browser $browser) {
             $browser->visit('/')
@@ -21,11 +21,7 @@ class criarAviso extends DuskTestCase
             ->type('password', '123123123')
             ->press('@login')
             ->clickLink('Avisos')
-            ->press('@criarAviso')
-            ->type('aviso', 'Aviso Teste')
-            ->check('user_id')
-            ->press('@cadastrar')
-            ->pause(1000)
+            ->clickLink('Excluir')
             ->assertPathIs('/avisos');
         });
     }

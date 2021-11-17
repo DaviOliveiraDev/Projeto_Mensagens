@@ -49,7 +49,7 @@
   
         <div>
             <a class="btn btn-success" href="{{route('avisos.index')}}">Voltar</a>
-            <input class="btn btn-success" type="submit" value="Cadastrar">
+            <input class="btn btn-success" dusk="cadastrar" type="submit" value="Cadastrar">
         </div>
 
     </form>
