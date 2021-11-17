@@ -38,7 +38,7 @@
 
                     <td>  
                         <div class="form-check form-switch">
-                            <input name="user_id[]" value="{{$aviso->id}}" class="form-check-input" type="checkbox"  id="flexSwitchCheckDefault">
+                            <input name="user_id" value="{{$aviso->id}}" class="form-check-input" type="checkbox"  id="flexSwitchCheckDefault">
                         </div>
                     </td>
 

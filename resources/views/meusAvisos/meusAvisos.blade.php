@@ -45,7 +45,7 @@
 
                         <form action="{{route('meusAvisos.update',['aviso_id'=>$a->aviso_id ,'user_id'=>$a->user_id])}}" method="POST">
                              {{csrf_field()}}
-                            <input class="btn btn-success" type="submit" value="Marcar Como Lido">
+                            <input class="btn btn-success" dusk="lido" type="submit" value="Marcar Como Lido">
                         </form>
 
                     </div>

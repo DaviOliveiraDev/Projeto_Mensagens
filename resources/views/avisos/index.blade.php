@@ -2,7 +2,7 @@
 @section('content')
 <div class="container">
 
-    <a class="btn btn-success" href="{{route('avisos.new')}}">Adicionar Novo Aviso</a>
+    <a class="btn btn-success" dusk="criarAviso" href="{{route('avisos.new')}}">Adicionar Novo Aviso</a>
 
     <h2 class="d-flex justify-content-center">Avisos</h2>
   
