@@ -18,7 +18,7 @@ class RegisterTest extends DuskTestCase
         $this->browse(function (Browser $browser) {
             $browser->visit('/register')
                     ->type('name', 'Usuario')
-                    ->type('email', 'usuario@teste.com')
+                    ->type('email', 'usuarioee@teste.com')
                     ->type('password', '123123123')
                     ->type('password_confirmation', '123123123')
                     ->press('Register')
