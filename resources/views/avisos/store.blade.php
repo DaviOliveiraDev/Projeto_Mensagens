@@ -9,7 +9,7 @@
 
         <p class="form-group">
             <label class="form-label">Título do Aviso</label><br>
-            <input class="form-control" type="text" name="aviso" value="{{old('aviso')}}"> 
+            <input class="form-control" type="text" dusk="aviso" name="aviso" value="{{old('aviso')}}"> 
         </p>
 
         <div class="row">
@@ -17,7 +17,6 @@
                 <div class="col-md-12">        
                     <textarea name="conteudo" id="summernote" value="{{old('conteudo')}}"></textarea>
                 </div>
-
             </div>
         </div>    
 
@@ -35,13 +34,12 @@
                 <tr>
                     <td>{{$aviso->id}}</td>
                     <td>{{$aviso->name}}</td>
-
                     <td>  
                         <div class="form-check form-switch">
-                            <input name="user_id" value="{{$aviso->id}}" class="form-check-input" type="checkbox"  id="flexSwitchCheckDefault">
+                            <input name="user_id[]"  value="{{$aviso->id}}" class="form-check-input" type="checkbox"  id="flexSwitchCheckDefault"
+                            plain:dusk="'my-custom-selector-' + row.index">
                         </div>
                     </td>
-
                 </tr>
                 @endforeach
             </tbody>
@@ -49,7 +47,7 @@
   
         <div>
             <a class="btn btn-success" href="{{route('avisos.index')}}">Voltar</a>
-            <input class="btn btn-success" dusk="cadastrar" type="submit" value="Cadastrar">
+            <button class="btn btn-success" dusk='editar' type="submit">Cadastrar</button>
         </div>
 
     </form>
