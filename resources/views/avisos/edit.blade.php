@@ -21,7 +21,6 @@
 
             </div>
         </div>    
-
                 <table class="table table-borderless" >
                     <thead>
                         <tr>
@@ -43,8 +42,6 @@
                                         id="flexSwitchCheckDefault"                                        
                                         @if($user->aviso->contains($aviso->id)) checked @endif >
                                     </div>
-
-        
                                 </div>
                             </td>
                         </tr>
@@ -53,7 +50,7 @@
                 </table>
         <div>
             <a class="btn btn-success" href="{{route('avisos.index')}}">Voltar</a>
-            <input class="btn btn-success" type="submit" value="Cadastrar">
+            <input class="btn btn-success" dusk='editar' type="submit" value="Cadastrar">
         </div>
 
     </form>
