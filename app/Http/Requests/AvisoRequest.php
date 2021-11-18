@@ -25,7 +25,7 @@ class AvisoRequest extends FormRequest
     {
         return [
             'aviso' => ['required', 'string'],
-            'conteudo' => ['required', 'string', 'max:400'],
+            'conteudo' => ['string', 'max:400'],
         ];
     }
 }
